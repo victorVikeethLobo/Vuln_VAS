@@ -1,6 +1,6 @@
 import json
 from concurrent.futures import ThreadPoolExecutor
-
+from vulnvas_package.modules.nuclei_module import run_nuclei_scan
 from vulnvas_package.modules.recon_module import run_all_recon
 from vulnvas_package.modules.vulnerability_module import analyze_vulnerabilities
 from vulnvas_package.modules.ml_module import predict_priority
@@ -10,7 +10,7 @@ from vulnvas_package.modules.report_summary import risk_summary
 from vulnvas_package.modules.graph_module import generate_graph
 
 
-def run_scan(target):
+def run_scan(target,quick=False):
 
     print("\n[+] Starting Vuln_VAS Scan")
     print("[+] Target:", target)
@@ -36,6 +36,11 @@ def run_scan(target):
     vulns = analyze_vulnerabilities(services)
 
     print("[✓] Vulnerability Analysis Complete")
+    print("\n[+] Running Nuclei Scan")
+
+    nuclei_vulns = run_nuclei_scan(target)
+
+    vulns.extend(nuclei_vulns)
 
     # --------------------------------
     # STEP 3 - Exploit Detection

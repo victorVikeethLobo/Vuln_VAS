@@ -21,21 +21,22 @@ model.fit(X,y)
 
 def predict_priority(vulnerabilities):
 
-    results=[]
+    results = []
 
     for v in vulnerabilities:
 
-        cvss=v["cvss"]
+        cvss = v.get("cvss", 5.0)
 
         exploit = 1 if v.get("exploit_available", False) else 0
-        port=v["port"]
 
-        pred=model.predict([[cvss,exploit,port]])[0]
+        port = v.get("port", 0)
+
+        pred = model.predict([[cvss, exploit, port]])[0]
 
         results.append({
-            "service":v["service"],
-            "cve":v["cve"],
-            "priority":pred
+            "service": v.get("service", "unknown"),
+            "cve": v.get("cve", "N/A"),
+            "priority": pred
         })
 
     return results

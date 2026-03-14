@@ -34,12 +34,12 @@ def main():
     parser.add_argument(
         "--quick",
         action="store_true",
-        help="Run quick scan (faster scan, skips heavy modules)"
+        help="Run quick scan (fast Nmap scan and skip heavy modules)"
     )
 
     args = parser.parse_args()
 
-    # PASS QUICK MODE
+    # PASS QUICK FLAG
     run_scan(args.target, quick=args.quick)
 
 
