@@ -1,0 +1,12 @@
+import argparse
+import sys
+import os
+from vulnvas_package.main import run_scan
+# Add project directory to Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from main import run_scan
+def banner():
+    print("""
+██╗   ██╗██╗   ██╗██╗     ███╗   ██╗██╗   ██╗ █████╗ ███████╗
+██║   ██║██║   ██║██║     ████╗  ██║██║   ██║██╔══██╗██╔════╝
+██║   ██║██║  
